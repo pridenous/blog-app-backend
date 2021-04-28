@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('/users', UserController::class);
+
+// Route::put('/users/{id}', [UserController::class, 'update']);
