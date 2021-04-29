@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,8 @@ Route::resource('/posts', PostsController::class);
 
 // Category
 Route::resource('/category', CategoryController::class);
+
+// Comments
+Route::resource('/comments', CommentController::class);
 
 // Route::put('/users/{id}', [UserController::class, 'update']);
