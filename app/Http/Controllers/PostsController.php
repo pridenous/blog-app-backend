@@ -18,7 +18,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('category')->get();
         return ['post' => $posts];
     }
 
@@ -40,30 +40,43 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'sub_content' => 'required',
-            'content' => 'required'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required',
+        //     'sub_content' => 'required',
+        //     'content' => 'required'
+        // ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => $validator->errors(),
-            ], 403);
-        }
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => $validator->errors(),
+        //     ], 403);
+        // }
 
         // $user = new Post;
         // $user->title = $request->title;
         // $user->sub_content = $request->sub_content;
         // $user->content = $request->content;
 
-        $data = $request->all();
-        $post = Post::create($data);
+        // $data = $request->all();
+        // $post = Post::create($data);
+
+        $user = new Post;
+        $user->title = $request->title;
+        $user->sub_content = $request->sub_content;
+        $user->content = $request->content;
+        $user->user_id = $request->user_id;
+        $user->views = $request->views;
+        $user->share = $request->share;
+        $user->image = 'a';
+        $user->categories_id = $request->categories_id;
+
+        $user->save();
+
         return response()->json([
             "status" => true,
             "message" => "Data User berhasil disimpan..",
-            "data" => $post
+            "data" => $user
         ]);
     }
     /**

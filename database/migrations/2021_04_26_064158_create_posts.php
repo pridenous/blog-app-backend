@@ -14,12 +14,13 @@ class CreatePosts extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('title');
             $table->string('sub_content', 1000);
             $table->string('content', 2000);
             $table->integer('user_id')->index()->unsigned();
-            $table->integer('views')->nullable;
+            $table->integer('categories_id')->index()->unsigned();
+            $table->integer('views')->nullable();
             $table->boolean('share')->default(true);
             $table->string('image')->nullable();
             $table->timestamps();
